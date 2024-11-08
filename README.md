@@ -40,8 +40,8 @@
    5. [阿里云服务器的基本使用](./notebook/C1%20大型语言模型%20LLM%20介绍/5.阿里云服务器的基本使用.md)
    6. [GitHub Codespaces 的基本使用（选修）](./notebook/C1%20大型语言模型%20LLM%20介绍/6.GitHub%20Codespaces%20的基本使用（选修）.md)
    7. [环境配置](./notebook/C1%20大型语言模型%20LLM%20介绍/7.环境配置.md)
-2. [使用 LLM API 开发应用](./notebook/C2%20使用%20LLM%20API%20开发应用/) 
-   1. [基本概念](./notebook/C2%20使用%20LLM%20API%20开发应用/1.%20基本概念.md)
+2. [C2 调用 LLM 实现基础问答](./notebook/C2%调用%LLM%实现基础问答/) 
+   1. [基本概念](./notebook/C2%调用%LLM%实现基础问答.md)
    2. [使用 LLM API](./notebook/C2%20使用%20LLM%20API%20开发应用/2.%20使用%20LLM%20API.ipynb)
         - 智谱 GLM
         - 本地部署的大模型
