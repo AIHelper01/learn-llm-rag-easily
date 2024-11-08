@@ -48,7 +48,7 @@
    3. [Prompt Engineering](./notebook/C2%20调用%20LLM%20实现基础问答/2.3%20Prompt%20Engineering.ipynb)
 3. [构建词向量](./notebook/C3%20构建词向量%20WordEmbedding/) 
    1. [词向量及向量知识库介绍](./notebook/C3%20构建词向量%20WordEmbedding/3.1%20词向量及向量知识库介绍.md)
-   2. [使用 Embedding API](./notebook/C3%20构建词向量%20WordEmbedding/3.2%20使用 Embedding API.ipynb)
+   2. [使用 Embedding API](./notebook/C3%20构建词向量%20WordEmbedding/3.2%20使用%20Embedding%20API.ipynb)
 4. [构建词向量](./notebook/C4%20准备数据/) 
    1. [数据预处理处理：读取、清洗与切片](./notebook/C4%20准备数据/4.1%20数据预处理.ipynb)
 5. [搭建向量数据库](./notebook/C5%20搭建知识库/) 
