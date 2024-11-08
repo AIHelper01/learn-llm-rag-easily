@@ -43,8 +43,6 @@
 2. [调用 LLM 实现基础问答](./notebook/C2%20调用%20LLM%20实现基础问答/) 
    1. [基本概念](./notebook/C2%20调用%20LLM%20实现基础问答/2.1%20基本概念.md)
    2. [使用 LLM API](./notebook/C2%20调用%20LLM%20实现基础问答/2.2%20使用%20LLM%20API.ipynb)
-        - 智谱 GLM
-        - 本地部署的大模型
    3. [Prompt Engineering](./notebook/C2%20调用%20LLM%20实现基础问答/2.3%20Prompt%20Engineering.ipynb)
 3. [构建词向量](./notebook/C3%20构建词向量%20WordEmbedding/) 
    1. [词向量及向量知识库介绍](./notebook/C3%20构建词向量%20WordEmbedding/3.1%20词向量及向量知识库介绍.md)
@@ -55,8 +53,6 @@
    1. [搭建向量数据库](/notebook/C5%20搭建知识库/5.1%20搭建向量数据库.ipynb)
 6. [构建 RAG 应用](./notebook/C6%20构建%20RAG%20应用/) 
    1. [将 LLM 接入 LangChain](./notebook/C6%20构建%20RAG%20应用/6.1%20基于%20LangChain%20调用%20LLM.ipynb)
-        - 智谱 GLM
-        - 本地部署的大模型
    2. [基于 LangChain 搭建检索问答链](./notebook/C6%20构建%20RAG%20应用/6.2%20构建检索问答链.ipynb)
    3. [基于 Streamlit 部署知识库助手](./notebook/C6%20构建%20RAG%20应用/6.3%20部署知识库助手.ipynb)
 5. [系统评估与优化](./notebook/C5%20系统评估与优化/) 
