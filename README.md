@@ -23,7 +23,7 @@
 
 
 
-## 目录结构说明：
+## 目录结构说明
 
       requirements.txt：官方环境下的安装依赖
       notebook：Notebook 源代码文件
