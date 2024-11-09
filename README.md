@@ -54,6 +54,10 @@ pip install -r requirements.txt
 
 
 
+> 如果chromadb再windows上安装失败，参考[issues: chromadb fails to install on windows](https://github.com/chroma-core/chroma/issues/189)
+
+
+
 ## 项目亮点
 
 1. 充分面向实践，动手学习大模型开发。相较于其他从理论入手、与实践代差较大的类似教程，本教程基于具有通用性的个人知识库助手项目打造，将普适的大模型开发理念融合在项目实践中，帮助学习者通过动手搭建个人项目来掌握大模型开发技能。
