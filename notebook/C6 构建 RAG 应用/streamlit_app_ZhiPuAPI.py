@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
 import os
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
@@ -10,9 +10,9 @@ from zhipuai_embedding import ZhipuAIEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
+from zhipuai_llm import ZhipuAILLM
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())    # read local .env file
-from zhipuai_llm import ZhipuAILLM
 
 #export zhipuai_api_key=
 #os.environ["OPENAI_API_BASE"] = 'https://api.chatgptid.net/v1'
@@ -21,7 +21,7 @@ zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
 
 def generate_response(input_text, zhipuai_api_key):
     # llm = ChatOpenAI(temperature=0.7, zhipuai_api_key=zhipuai_api_key)
-    llm = ZhipuAILLM(model="chatglm_std", temperature=0, api_key=zhipuai_api_key)
+    llm = ZhipuAILLM(model="glm-4", temperature=0, api_key=zhipuai_api_key)
     output = llm.invoke(input_text)
     output_parser = StrOutputParser()
     output = output_parser.invoke(output)
@@ -46,7 +46,7 @@ def get_vectordb():
 def get_chat_qa_chain(question:str,zhipuai_api_key:str):
     vectordb = get_vectordb()
     # llm = ChatOpenAI(model_name = "gpt-3.5-turbo", temperature = 0,zhipuai_api_key = zhipuai_api_key)
-    llm = ZhipuAILLM(model="chatglm_std", temperature=0, api_key=zhipuai_api_key)
+    llm = ZhipuAILLM(model="glm-4", temperature=0, api_key=zhipuai_api_key)
     memory = ConversationBufferMemory(
         memory_key="chat_history",  # 与 prompt 的输入变量保持一致。
         return_messages=True  # 将以消息列表的形式返回聊天记录，而不是单个字符串
@@ -64,7 +64,7 @@ def get_chat_qa_chain(question:str,zhipuai_api_key:str):
 def get_qa_chain(question:str,zhipuai_api_key:str):
     vectordb = get_vectordb()
     # llm = ChatOpenAI(model_name = "gpt-3.5-turbo", temperature = 0,zhipuai_api_key = zhipuai_api_key)
-    llm = ZhipuAILLM(model="chatglm_std", temperature=0, api_key=zhipuai_api_key)
+    llm = ZhipuAILLM(model="glm-4", temperature=0, api_key=zhipuai_api_key)
 
     template = """使用以下上下文来回答最后的问题。如果你不知道答案，就说你不知道，不要试图编造答
         案。最多使用三句话。尽量使答案简明扼要。总是在回答的最后说“谢谢你的提问！”。
@@ -84,7 +84,7 @@ def get_qa_chain(question:str,zhipuai_api_key:str):
 # Streamlit 应用程序界面
 def main():
     st.title('🦜🔗 动手学大模型应用开发')
-    zhipuai_api_key = st.sidebar.text_input('GLM API Key', type='password')
+    # zhipuai_api_key = st.sidebar.text_input('GLM API Key', type='password')
 
     # 添加一个选择按钮来选择不同的模型
     #selected_method = st.sidebar.selectbox("选择模式", ["qa_chain", "chat_qa_chain", "None"])

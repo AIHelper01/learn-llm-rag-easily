@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
 import os
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
@@ -13,6 +13,7 @@ from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())    # read local .env file
 from langchain_community.llms import Ollama
+from langchain_community.embeddings import OllamaEmbeddings
 
 
 def generate_response(input_text):
@@ -27,7 +28,7 @@ def generate_response(input_text):
 
 def get_vectordb():
     # 定义 Embeddings
-    embedding = ZhipuAIEmbeddings()
+    oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="nomic-embed-text")
     # 向量数据库持久化路径
     # persist_directory = '../C3 搭建知识库/data_base/vector_db/chroma'
     persist_directory = '../../data_base/vector_db/chroma'
@@ -35,7 +36,7 @@ def get_vectordb():
     # 加载数据库
     vectordb = Chroma(
         persist_directory=persist_directory,  # 允许我们将persist_directory目录保存到磁盘上
-        embedding_function=embedding
+        embedding_function=oembed
     )
     return vectordb
 
