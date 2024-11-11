@@ -26,24 +26,24 @@
 
 ## 目录结构说明
 
-      requirements.txt：官方环境下的安装依赖
-      notebook：Notebook 源代码文件
-      docs：Markdown 文档文件
-      figures：图片
-      data_base：所使用的知识库源文件
+```shell
+data_base：知识库源文件和向量数据库文件
+notebook：Notebook 源代码文件
+requirements.txt：安装依赖
+figures：图片
+```
 
 
 
 ## 快速开始
 
-
-克隆仓库：
+1. 克隆仓库：
 
 ```
 $ git clone https://gitee.com/coderwillyan/llm-rag
 ```
 
-安装依赖： 
+2. 安装依赖： 
 
 进入项目llm-rag的根目录，执行pip install指令：
 
@@ -51,11 +51,11 @@ $ git clone https://gitee.com/coderwillyan/llm-rag
 pip install -r requirements.txt
 ```
 
-使用jupyter lab依次执行代码
+3. 使用jupyter lab依次执行代码
 
 
 
-> 如果chromadb再windows上安装失败，参考[issues: chromadb fails to install on windows](https://github.com/chroma-core/chroma/issues/189)
+> 如果chromadb在windows上安装失败，参考：[issues: chromadb fails to install on windows](https://github.com/chroma-core/chroma/issues/189)
 
 
 
@@ -63,11 +63,10 @@ pip install -r requirements.txt
 
 1. [LLM 介绍](./notebook/C1%20大型语言模型%20LLM%20介绍/) 
    1. [LLM 的理论介绍](./notebook/C1%20大型语言模型%20LLM%20介绍/1.大型语言模型%20LLM%20理论简介.md)
-   2. [什么是 RAG，RAG 的核心优势](./notebook/C1%20大型语言模型%20LLM%20介绍/2.检索增强生成%20RAG%20简介.md)
+   2. [检索增强生成 RAG 简介](./notebook/C1%20大型语言模型%20LLM%20介绍/2.检索增强生成%20RAG%20简介.md)
    3. [什么是 LangChain](./notebook/C1%20大型语言模型%20LLM%20介绍/3.LangChain%20简介.md)
    4. [开发 LLM 应用的整体流程](./notebook/C1%20大型语言模型%20LLM%20介绍/4.开发%20LLM%20应用的整体流程.md)
-   5. [阿里云服务器的基本使用](./notebook/C1%20大型语言模型%20LLM%20介绍/5.阿里云服务器的基本使用.md)
-   6. [GitHub Codespaces 的基本使用（选修）](./notebook/C1%20大型语言模型%20LLM%20介绍/6.GitHub%20Codespaces%20的基本使用（选修）.md)
+   5. [AutoDL服务器的基本使用](./notebook/C1%20大型语言模型%20LLM%20介绍/5.AutoDL服务器的基本使用.md)
    7. [环境配置](./notebook/C1%20大型语言模型%20LLM%20介绍/7.环境配置.md)
 2. [调用 LLM 实现基础问答](./notebook/C2%20调用%20LLM%20实现基础问答/) 
    1. [基本概念](./notebook/C2%20调用%20LLM%20实现基础问答/2.1%20基本概念.md)
