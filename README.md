@@ -7,7 +7,7 @@
 
 ## 项目概览
 
-本项目是基于langchain的大模型RAG外挂知识库的开发教程，主要内容包括：
+**本项目是基于langchain的大模型RAG外挂知识库的开发教程，主要内容包括：**
 
 1. **大模型简介**，什么是大模型、大模型特点是什么、LangChain 是什么，如何实现RAG；
 2. **如何调用大模型 API**，介绍了国内外知名大模型产品 （ChatGPT、智谱AI等）API 的多种调用方式，包括调用原生 API、封装为 LangChain LLM等调用方式；
@@ -16,7 +16,7 @@
 5. **构建 RAG 应用**，包括将 LLM 接入到 LangChain 构建检索问答链，使用 Streamlit 进行应用部署
 6. **验证迭代**，大模型开发如何实现验证迭代，一般的评估方法有什么；
 
-如果希望0代码完成本地知识库的搭建，可以借助一些优秀的开源项目： 
+**如果希望0代码完成本地知识库的搭建，可以借助一些优秀的开源项目：** 
 
 1. [ragflow，一款基于深度文档理解构建的开源 RAG（Retrieval-Augmented Generation）引擎](https://github.com/infiniflow/ragflow/tree/main)
 2. [AnythingLLM，一个全栈应用程序，您可以使用现成的商业大语言模型或流行的开源大语言模型，再结合向量数据库解决方案构建一个私有ChatGPT](https://github.com/Mintplex-Labs/anything-llm)
