@@ -1,4 +1,4 @@
-# 动手学大模型应用开发
+# 轻松学大模型应用开发
 
 <div align=center>
 <img src="figures/C0-0-logo.png" width = "1000">
