@@ -53,8 +53,6 @@ pip install -r requirements.txt
 
 3. 使用jupyter lab依次执行代码
 
-
-
 > 如果chromadb在windows上安装失败，参考：[issues: chromadb fails to install on windows](https://github.com/chroma-core/chroma/issues/189)
 
 
