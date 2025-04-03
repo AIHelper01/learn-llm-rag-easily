@@ -1,0 +1,23 @@
+LLM模型
+
+
+embeddings相关API
+from langchain_community.embeddings import ZhipuAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+ollama： 
+from chromadb.utils.embedding_functions.ollama_embedding_function import OllamaEmbeddingFunction
+ollama_ef = OllamaEmbeddingFunction(url="http://localhost:11434",model_name="nomic-embed-text:latest")
+embeddings = ollama_ef(["This is my first text to embed",
+                        "This is my second document"])
+
+
+加载数据
+from langchain.document_loaders.pdf import PyMuPDFLoader
+
+数据切分
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+向量数据库
+from langchain_community.vectorstores import Chroma

@@ -1,7 +1,7 @@
 # 轻松学大模型应用开发
 
 <div align=center>
-<img src="figures/C0-0-logo.png" width = "1000">
+<img src="assets/RAG封面.png" width = "1000">
 </div>
 
 
@@ -10,7 +10,7 @@
 **本项目是基于langchain的大模型RAG外挂知识库的开发教程，主要内容包括：**
 
 1. **大模型简介**，什么是大模型、大模型特点是什么、LangChain 是什么，如何实现RAG；
-2. **如何调用大模型 API**，介绍了国内外知名大模型产品 （ChatGPT、智谱AI等）API 的多种调用方式，包括调用原生 API、封装为 LangChain LLM等调用方式；
+2. **如何调用大模型 API**，介绍了国内外知名大模型产品 （DeepSeek、智谱AI等）API 的多种调用方式，包括调用原生 API、封装为 LangChain LLM等调用方式；
 3. **如何调用本地部署的大模型**，使用ollama完成大模型的本地化部署，调用本地大模型的能力；
 4. **知识库搭建**，不同类型知识库文档的加载、处理，向量数据库的搭建；
 5. **构建 RAG 应用**，包括将 LLM 接入到 LangChain 构建检索问答链，使用 Streamlit 进行应用部署
