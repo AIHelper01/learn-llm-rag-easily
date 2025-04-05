@@ -138,5 +138,5 @@ for question in questions:
     result = qa_chain({"question": question})
     print(f"问题：{question}")
     print(f"回答：{result['answer']}")
-    print(f"引用的来源：{result['source_documents'][0].metadata}")  # 显示来源文档
+    # print(f"引用的来源：{result['source_documents'][0].metadata}")  # 显示来源文档
     print("对话历史：", memory.load_memory_variables({}))

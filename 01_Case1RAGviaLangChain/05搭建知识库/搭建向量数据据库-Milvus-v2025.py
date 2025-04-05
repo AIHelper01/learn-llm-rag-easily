@@ -113,6 +113,8 @@ connection_args = {
 # 定义每批处理的文档数量
 batch_size = 30
 
+# 如果只想导入部分数据
+# split_docs = split_docs[:3]
 try:
     # 计算总批次数
     total_batches = (len(split_docs) + batch_size - 1) // batch_size
@@ -132,11 +134,10 @@ try:
 
         if batch_num == 0:
             # 第一次创建向量数据库
-            # 第一次创建向量数据库
             vectordb = Milvus.from_documents(
-            documents=split_docs,
+            documents=batch_docs,
             embedding=emb_bgem3,
-            collection_name="vmaxs",
+            collection_name="Vmaxs",
             drop_old=False,
             connection_args=connection_args,
             )
