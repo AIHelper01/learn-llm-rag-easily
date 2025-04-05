@@ -27,18 +27,7 @@ def get_vectordb():
 
 
 def get_llm():
-    _ = load_dotenv(find_dotenv())    # read local .env file
-    deepseek_api_key = os.environ['DEEPSEEK_API_KEY']
-    myllm = ChatDeepSeek(
-        model="deepseek-reasoner",
-        temperature=0,
-        max_tokens=None,
-        timeout=None,
-        # max_retries=2,
-        api_key=deepseek_api_key,
-        # other params...
-    )
-    return  myllm
+    return OllamaLLM(base_url='http://localhost:11434', model='deepseek-r1:1.5b', temperature=0.1)
 
 
 def generate_response(input_text):
