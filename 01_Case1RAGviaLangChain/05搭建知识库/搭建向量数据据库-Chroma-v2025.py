@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# embedding选型
+from langchain_community.embeddings import OllamaEmbeddings
+emb_bgem3 = OllamaEmbeddings(base_url='http://localhost:11434',model="bge-m3:latest")
+
 # 批量处理文件夹中所有文件
 import os
 
@@ -61,21 +65,6 @@ for text in texts:
     # 3. 安全删除空格（保留URL等特殊场景）
     text.page_content = space_pattern.sub('', text.page_content)
 
-
-
-from dotenv import load_dotenv, find_dotenv
-
-# pip install python-dotenv
-
-_ = load_dotenv(find_dotenv())
-
-from langchain_community.embeddings import ZhipuAIEmbeddings
-
-zhipu_embed = ZhipuAIEmbeddings(
-    model="embedding-2",
-    api_key="5713143e8fdc4b4a8b284cf97092e70f.qEK71mGIlavzO1Io",
-)
-
 ''' 
 * RecursiveCharacterTextSplitter 递归字符文本分割
 RecursiveCharacterTextSplitter 将按不同的字符递归地分割(按照这个优先级["\n\n", "\n", " ", ""])，
@@ -111,13 +100,10 @@ split_docs[90].page_content
 
 import os
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import ZhipuAIEmbeddings
 
 # 定义持久化目录
-persist_directory = '../chroma-vmax-6'
+persist_directory = '../chroma-vmax'
 
-# 创建嵌入模型
-embedding = ZhipuAIEmbeddings(model="embedding-2", api_key=os.environ['ZHIPUAI_API_KEY'])
 
 # 定义每批处理的文档数量
 batch_size = 30
@@ -144,7 +130,7 @@ try:
             vectordb = Chroma.from_documents(
                 collection_name='vmax-s',
                 documents=batch_docs,
-                embedding=embedding,
+                embedding=emb_bgem3,
                 persist_directory=persist_directory
             )
         else:

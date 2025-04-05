@@ -1,4 +1,8 @@
 LLM模型
+from langchain_community.llms import Ollama
+llm_deepseek = Ollama(base_url='http://localhost:11434', model='deepseek-r1:1.5b', temperature=0.1)
+from langchain_ollama import OllamaLLM
+model = OllamaLLM(base_url='http://localhost:11434', model='deepseek-r1:1.5b',temperature=0.1)
 
 
 embeddings相关API
