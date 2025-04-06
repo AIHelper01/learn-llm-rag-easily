@@ -10,7 +10,7 @@ _ = load_dotenv(find_dotenv())    # read local .env file
 zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
 
 # 定义持久化目录
-persist_directory = '../chroma-vmax-6'
+persist_directory = '../chroma-vmax'
 
 # 创建嵌入模型
 from langchain_community.embeddings import ZhipuAIEmbeddings

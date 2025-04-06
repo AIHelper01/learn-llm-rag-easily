@@ -6,26 +6,18 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain.retrievers import ContextualCompressionRetriever, EnsembleRetriever
-from langchain.retrievers.document_compressors import CohereRerank
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain_community.retrievers import BM25Retriever
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-import cohere
-from pymilvus import connections, Collection
+from pymilvus import Collection, connections
 import re
-
-import warnings
-warnings.filterwarnings("ignore")  # 禁用所有警告
-
-# 你的代码在这里
 
 # Initialize memory outside the function so it persists across questions
 memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True
 )
-
 
 # 初始化 Milvus 向量数据库
 def get_vectordb():
@@ -42,11 +34,9 @@ def get_vectordb():
     )
     return vectordb
 
-
 def get_llm():
     return OllamaLLM(base_url='http://localhost:11434', model='deepseek-r1:1.5b', temperature=0.1, streaming=True,
-                     callbacks=[StreamingStdOutCallbackHandler()])
-
+    callbacks=[StreamingStdOutCallbackHandler()])
 
 def get_text_list_from_milvus(
         collection_name: str,
@@ -59,18 +49,27 @@ def get_text_list_from_milvus(
     """
     从 Milvus 集合中读取指定字段（默认是 text）并返回列表
     """
+    # 1. 连接 Milvus
     connections.connect(alias="default", host=host, port=port)
+
+    # 2. 加载集合
     collection = Collection(name=collection_name)
     collection.load()
+
+    # 3. 查询数据
     results = collection.query(
-        expr=expr,
-        output_fields=output_fields,
-        limit=limit
-    )
-    field_name = output_fields[0]
+            expr=expr,
+            output_fields=output_fields,
+            limit=limit
+        )
+
+    # 4. 提取目标字段为列表
+    if not output_fields:
+        raise ValueError("output_fields 不能为空")
+
+    field_name = output_fields[0]  # 默认取第一个字段
     data_list = [item[field_name] for item in results]
     return data_list
-
 
 def determine_query_type(question: str) -> str:
     """
@@ -136,7 +135,6 @@ def get_dynamic_weights(query_type: str) -> tuple:
     else:
         return (0.5, 0.5)  # 平衡权重
 
-
 def get_qa_chain_with_memory(question: str):
     vectordb = get_vectordb()
 
@@ -161,21 +159,13 @@ def get_qa_chain_with_memory(question: str):
         retrievers=[bm25_retriever, vector_retriever],
         weights=[bm25_weight, vector_weight],  # 使用动态权重
     )
-
-    # 5. 使用 Cohere Rerank 优化结果
-    cohere_client = cohere.Client(api_key="Tahx1eySFbKvu9sTyTXrRLf59la3ZUG9vy02stRZ")
-    compressor = CohereRerank(
-        client=cohere_client,
-        top_n=5,
-        model="rerank-multilingual-v3.0"
+    # 5. 混合检索（EnsembleRetriever）作为最终检索器
+    ensemble_retriever = EnsembleRetriever(
+        retrievers=[bm25_retriever, vector_retriever],
+        weights=[0.5, 0.5],  # 调整BM25和向量检索的权重
     )
 
-    compression_retriever = ContextualCompressionRetriever(
-        base_compressor=compressor,
-        base_retriever=ensemble_retriever
-    )
-
-    # 6. 定义提示模板（加入权重信息）
+   # 6. 定义提示模板（加入权重信息）
     QA_CHAIN_PROMPT = PromptTemplate(
         input_variables=["chat_history", "question", "context"],
         template=f"""
@@ -209,10 +199,11 @@ def get_qa_chain_with_memory(question: str):
     """
     )
 
+
     # 7. 构建对话式检索链
     qa_chain = ConversationalRetrievalChain.from_llm(
         llm=get_llm(),
-        retriever=compression_retriever,
+        retriever=ensemble_retriever,  # 直接使用混合检索器
         memory=memory,
         output_key="answer",
         combine_docs_chain_kwargs={
@@ -224,15 +215,10 @@ def get_qa_chain_with_memory(question: str):
     result = qa_chain({"question": question})
     return result
 
-
 # 测试问题
 questions = [
-    "什么是VMAX的上网日志业务？",  # 定义类问题，更适合关键词检索
-    "上网日志业务包含哪些功能？",  # 列举类问题，更适合关键词检索
-    "整理成excel表格",  # 结构化输出要求，更适合关键词检索
-    "为什么我的VMAX设备会出现日志丢失问题？",  # 原因分析类，更适合语义检索
-    "如何解决VMAX日志存储空间不足的问题？",  # 解决方案类，更适合语义检索
-    "VMAX-S与其他型号的主要区别是什么？"  # 平衡型问题
+    "什么是VMAX的上网日志业务？",
+    "上网日志业务包含哪些功能？"
 ]
 
 for question in questions:
