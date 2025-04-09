@@ -102,7 +102,7 @@ import os
 from langchain_community.vectorstores import Chroma
 
 # 定义持久化目录
-persist_directory = '../chroma-vmax'
+persist_directory = '../data_base/vector_db/chroma-vmax'
 
 
 # 定义每批处理的文档数量

@@ -105,7 +105,7 @@ from langchain_core.documents import Document
 # 定义持久化目录
 # 向量库创建
 connection_args = {
-    "host": "192.168.0.188",
+    "host": "129.201.70.35",
     "port": "19530",
 }
 
