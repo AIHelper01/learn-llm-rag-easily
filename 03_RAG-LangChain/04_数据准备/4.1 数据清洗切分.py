@@ -3,9 +3,6 @@
 
 # 批量处理文件夹中所有文件
 
-# In[49]:
-
-
 import os
 
 # 获取folder_path下所有文件路径，储存在file_paths里
@@ -66,8 +63,6 @@ for text in texts:
     text.page_content = space_pattern.sub('', text.page_content)
 
 
-# In[50]:
-
 
 from dotenv import load_dotenv, find_dotenv 
 # pip install python-dotenv
@@ -81,8 +76,6 @@ zhipu_embed = ZhipuAIEmbeddings(
     api_key="5713143e8fdc4b4a8b284cf97092e70f.qEK71mGIlavzO1Io",
 )
 
-
-# In[51]:
 
 
 ''' 
@@ -98,19 +91,11 @@ RecursiveCharacterTextSplitter需要关注的是4个参数：
 '''
 #导入文本分割器
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-
-# In[61]:
-
-
 # 知识库中单段文本长度
 CHUNK_SIZE = 512
 
 # 知识库中相邻文本重合长度
 OVERLAP_SIZE = 50
-
-
-# In[62]:
 
 
 # 使用递归字符文本分割器
@@ -120,8 +105,6 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 # text_splitter.split_text(text.page_content[0:1000])
 
-
-# In[63]:
 
 
 split_docs = text_splitter.split_documents(texts)

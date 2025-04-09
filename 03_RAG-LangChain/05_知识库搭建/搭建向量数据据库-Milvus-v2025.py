@@ -3,7 +3,7 @@
 
 # embedding选型
 from langchain_community.embeddings import OllamaEmbeddings
-emb_bgem3 = OllamaEmbeddings(base_url='http://localhost:11434',model="bge-m3:latest")
+my_emb = OllamaEmbeddings(base_url='http://localhost:11434',model="bge-m3:latest")
 
 # 批量处理文件夹中所有文件
 import os
@@ -136,7 +136,7 @@ try:
             # 第一次创建向量数据库
             vectordb = Milvus.from_documents(
             documents=batch_docs,
-            embedding=emb_bgem3,
+            embedding=my_emb,
             collection_name="Vmaxs",
             drop_old=False,
             connection_args=connection_args,
