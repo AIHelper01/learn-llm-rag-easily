@@ -209,11 +209,26 @@ global.index-url='https://mirrors.aliyun.com/pypi/simple/'
 jupyter notebook --generate-config
 ```
 
-打开`upyter_notebook_config.py`，例如记事本软件
+```
+(base) root@server2:/opt/anaconda3# jupyter notebook --generate-config
+Writing default config to: /root/.jupyter/jupyter_notebook_config.py
+```
+
+
+
+打开`jupyter_notebook_config.py`，
 
 搜索notebook_dir字段进行修改,
 
 注意：删除#，去注释；顶格写，开头的空格也要删除
+
+```
+(base) root@server2:/opt/anaconda3# vim /root/.jupyter/jupyter_notebook_config.py
+```
+
+![image-20250410161711040](../../assets/rag5.png)
+
+
 
 再次**启动 Jupyter Lab**，修改生效：
 
@@ -282,21 +297,14 @@ jupyter kernelspec remove sklearn		# 将Jupyter中的sklearn虚拟环境删除�
 
 ## 设置远程登陆
 
-生成配置文件
-
-```
-jupyter notebook --generate-config
-```
-
 设置密码
 
 ```
-jupyter notebook password
-(base) root@iZwz9fhjq09pqz5njvics0Z:/opt/software# jupyter notebook password
-Enter password:
-Verify password:
+(base) root@server2:/opt/anaconda3# jupyter notebook password
+Enter password: 
+Verify password: 
 [JupyterPasswordApp] Wrote hashed password to /root/.jupyter/jupyter_server_config.json
-(base) root@iZwz9fhjq09pqz5njvics0Z:/opt/software#
+(base) root@server2:/opt/anaconda3# 
 ```
 
 获取密码
@@ -305,7 +313,7 @@ Verify password:
 cat /root/.jupyter/jupyter_server_config.json
 {
   "IdentityProvider": {
-    "hashed_password": "hashed_password": "argon2:$argon2id$v=19$m=10240,t=10,p=8$OoFDoyZtpDpSErhEa5ebSw$YOzERE1lXToSyowDpAzyzIS+sEoBpmlu+jvp8rRX+yw"
+    "hashed_password": "hashed_password": "argon2:$argon2id$v=19$m=10240,t=10,p=8$wBDVzsMcNN90N2ryRMrwRQ$iQOnV0cSc5INKNCjTJNIXBopbFrLgPlGkSO7VopUWiI"
   }
 }
 ```
@@ -316,9 +324,57 @@ cat /root/.jupyter/jupyter_server_config.json
 vim /root/.jupyter/jupyter_notebook_config.py
 
 c.ServerApp.ip = '*' #本机静态IP 建议使用*
-c.ServerApp.password = "argon2:$argon2id$v=19$m=10240,t=10,p=8$OoFDoyZtpDpSErhEa5ebSw$YOzERE1lXToSyowDpAzyzIS+sEoBpmlu+jvp8rRX+yw'
+c.ServerApp.password = "argon2:$argon2id$v=19$m=10240,t=10,p=8$wBDVzsMcNN90N2ryRMrwRQ$iQOnV0cSc5INKNCjTJNIXBopbFrLgPlGkSO7VopUWiI"
 # 这个是刚要保存的秘钥
 c.ServerApp.open_browser = False # 运行时不打开本机浏览器
 c.ServerApp.port = 8888    #端口，可以随意指定 不与系统其他端口冲突即可
 c.ServerApp.allow_remote_access = True  #允许远程访问
+c.ServerApp.root_dir = '/opt/workspace' # 如果服务器包含多个用户，建议修改初始路径，注意最后不需要使用/结束
 ```
+
+
+
+后台启动
+
+```
+nohup jupyter lab --allow-root > ~/jupyterlab.log 2>&1 &
+```
+
+手动打开浏览器
+
+```
+http://129.201.70.32:8888/lab
+```
+
+
+
+关闭后台进程
+
+以下是查看 Jupyter 进程 ID 的几种方法，结合不同场景和工具整理：
+
+------
+
+**通过 `ps` 命令全局搜索**
+
+适用于终端已关闭或通过 `nohup` 启动的场景：
+
+```bash
+ps -aux | grep 'jupyter'  # 列出所有包含 "jupyter" 的进程
+```
+
+------
+
+**通过端口号锁定进程**
+
+若已知 Jupyter 使用的端口（如 8888）：
+
+```bash
+lsof -i :8888  # 查看占用该端口的进程
+```
+
+
+
+```
+kill -9 <对应进程>
+```
+
