@@ -90,10 +90,6 @@ base                  *  /opt/anaconda3
 
 
 
-
-
-
-
 ## 卸载
 
 找到 Anaconda 安装目录
@@ -126,8 +122,6 @@ rm -rf /opt/anaconda3
 ```
 source ~/.bashrc 
 ```
-
-
 
 检查是否卸载成功
 运行以下命令检查 conda 是否已卸载：
