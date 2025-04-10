@@ -250,7 +250,7 @@ conda create --name <虚拟环境名称> python=3.12
 
 
 
-## 添加新的kernel
+## 为虚拟环境添加新的kernel
 
 使用以下指令添加新的kernel: 
 
@@ -318,7 +318,7 @@ cat /root/.jupyter/jupyter_server_config.json
 vim /root/.jupyter/jupyter_notebook_config.py
 
 c.ServerApp.ip = '*' #本机静态IP 建议使用*
-c.ServerApp.password = "argon2:$argon2id$v=19$m=10240,t=10,p=8$wBDVzsMcNN90N2ryRMrwRQ$iQOnV0cSc5INKNCjTJNIXBopbFrLgPlGkSO7VopUWiI"
+c.ServerApp.password = "argon2:$argon2id$v=19$m=10240,t=10,p=8$2lCfB+VhqpyRJzYMDo/6Fw$LFrth4xxjtnk6RSEIfHu/fCz4dxBzeA8o/B2+KTM/H8"
 # 这个是刚要保存的秘钥
 c.ServerApp.open_browser = False # 运行时不打开本机浏览器
 c.ServerApp.port = 8888    #端口，可以随意指定 不与系统其他端口冲突即可
