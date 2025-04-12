@@ -59,7 +59,7 @@ learn-llm-rag-easily/
 
 ## 📜 附RAG
 
-![img](figures/rag1.png)
+![img](assets/rag-02-10.png)
 
 
 
