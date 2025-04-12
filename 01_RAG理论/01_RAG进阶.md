@@ -1,7 +1,5 @@
 # RAG
 
-参考开源项目： https://github.com/datawhalechina/llm-universe
-
 ## LangChain
 
 [toc]
