@@ -6,3 +6,5 @@
 
 参考milvus官网文档： https://milvus.io/docs/zh/how_to_enhance_your_rag.md
 
+代码参考： https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag
+
