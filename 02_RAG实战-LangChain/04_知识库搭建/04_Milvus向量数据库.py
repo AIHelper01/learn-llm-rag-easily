@@ -3,7 +3,7 @@
 
 # embedding选型
 from langchain_community.embeddings import OllamaEmbeddings
-my_emb = OllamaEmbeddings(base_url='http://localhost:11434',model="bge-m3:latest")
+my_emb = OllamaEmbeddings(base_url='http://localhost:11434',model="dengcao/Qwen3-Embedding-0.6B:F16")
 
 # 批量处理文件夹中所有文件
 import os
@@ -99,13 +99,14 @@ print(f"切分后的字符数（可以用来大致评估 token 数）：{sum([le
 split_docs[90].page_content
 
 import os
-from langchain_community.vectorstores import Milvus
+# from langchain_community.vectorstores import Milvus
+from langchain_milvus import Milvus, BM25BuiltInFunction
 from langchain_core.documents import Document
 
 # 定义持久化目录
 # 向量库创建
 connection_args = {
-    "host": "129.201.70.32",
+    "host": "129.201.70.35",
     "port": "19530",
 }
 
@@ -137,10 +138,23 @@ try:
             vectordb = Milvus.from_documents(
             documents=batch_docs,
             embedding=my_emb,
-            collection_name="Vmaxs",
+            collection_name="ZXVMAXS",
             drop_old=False,
             connection_args=connection_args,
             )
+
+            # 如果使用Milvus的混合检索
+            # vectordb = Milvus.from_documents(
+            # documents=batch_docs,
+            # embedding=my_emb,
+            # builtin_function=BM25BuiltInFunction(input_field_names="text", output_field_names="sparse" ),
+            # text_field="text",
+            # vector_field=["dense", "sparse"],
+            # collection_name="ZXVMAXS3",
+            # drop_old=False,
+            # connection_args=connection_args,
+            # consistency_level="Strong",
+            # )            
 
         else:
             # 后续批次添加到现有集合
