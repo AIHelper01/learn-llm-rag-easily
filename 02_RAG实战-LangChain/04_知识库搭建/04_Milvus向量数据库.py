@@ -138,7 +138,7 @@ try:
             vectordb = Milvus.from_documents(
             documents=batch_docs,
             embedding=my_emb,
-            collection_name="ZXVMAXS",
+            collection_name="ZXVMAXS0716",
             drop_old=False,
             connection_args=connection_args,
             )
