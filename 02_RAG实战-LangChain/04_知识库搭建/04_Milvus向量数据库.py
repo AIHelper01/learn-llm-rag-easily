@@ -3,7 +3,9 @@
 
 # embedding选型
 from langchain_community.embeddings import OllamaEmbeddings
-my_emb = OllamaEmbeddings(base_url='http://localhost:11434',model="dengcao/Qwen3-Embedding-0.6B:F16")
+my_emb = OllamaEmbeddings(
+    base_url='http://localhost:11434',
+    model="bge-m3:latest")
 
 # 批量处理文件夹中所有文件
 import os
@@ -135,13 +137,13 @@ try:
 
         if batch_num == 0:
             # 第一次创建向量数据库
-            vectordb = Milvus.from_documents(
-            documents=batch_docs,
-            embedding=my_emb,
-            collection_name="ZXVMAXS0716",
-            drop_old=False,
-            connection_args=connection_args,
-            )
+            # vectordb = Milvus.from_documents(
+            # documents=batch_docs,
+            # embedding=my_emb,
+            # collection_name="ZXVMAXS",
+            # drop_old=False,
+            # connection_args=connection_args,
+            # )
 
             # 如果使用Milvus的混合检索
             # vectordb = Milvus.from_documents(
@@ -150,11 +152,22 @@ try:
             # builtin_function=BM25BuiltInFunction(input_field_names="text", output_field_names="sparse" ),
             # text_field="text",
             # vector_field=["dense", "sparse"],
-            # collection_name="ZXVMAXS3",
+            # collection_name="ZXVMAXS4",
             # drop_old=False,
             # connection_args=connection_args,
             # consistency_level="Strong",
-            # )            
+            # )     
+            # 创建 Milvus VectorStore，实现 dense + sparse 混合检索 
+            vectordb = Milvus.from_documents( 
+            documents=batch_docs, 
+            embedding=my_emb, # 用于语义检索的 dense 向量 
+            builtin_function=BM25BuiltInFunction(), # BM25 的 sparse 全文检索 
+            vector_field=["dense", "sparse"], # 指定两个向量字段名称 
+            connection_args=connection_args, 
+            collection_name="ZXVMAXS6",
+            consistency_level="Strong", 
+            drop_old=True, # 若已有旧 collection，可删除重建 
+            )
 
         else:
             # 后续批次添加到现有集合
