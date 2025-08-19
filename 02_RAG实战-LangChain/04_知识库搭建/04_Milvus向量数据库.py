@@ -7,6 +7,16 @@ my_emb = OllamaEmbeddings(
     base_url='http://localhost:11434',
     model="bge-m3:latest")
 
+
+# embedding选型
+# from vllm import LLM
+# my_emb = LLM(
+#     model="/opt/workspace/models/Qwen/Qwen3-Embedding-0___6B",
+#     task="embed",
+#     enforce_eager=True,      # 避免可能的图优化问题
+#     dtype="float16"          # 节省显存
+# )
+
 # 批量处理文件夹中所有文件
 import os
 
@@ -137,6 +147,7 @@ try:
 
         if batch_num == 0:
             # 第一次创建向量数据库
+<<<<<<< HEAD
             # vectordb = Milvus.from_documents(
             # documents=batch_docs,
             # embedding=my_emb,
@@ -144,6 +155,15 @@ try:
             # drop_old=False,
             # connection_args=connection_args,
             # )
+=======
+            vectordb = Milvus.from_documents(
+            documents=batch_docs,
+            embedding=my_emb,
+            collection_name="ZXVMAXS0821",
+            drop_old=False,
+            connection_args=connection_args,
+            )
+>>>>>>> b17ee39 (v0819)
 
             # 如果使用Milvus的混合检索
             # vectordb = Milvus.from_documents(
