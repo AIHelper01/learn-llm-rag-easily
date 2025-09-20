@@ -10,7 +10,7 @@
 
 ## 📚 项目内容
 
-项目分为三个核心部分：
+项目的核心部分：
 
 ### 1. RAG 理论基础
 - [00_RAG入门](./01_RAG理论/00_RAG入门.md)
@@ -27,10 +27,6 @@
 - [进阶技巧：混合检索、Rerank、分块优化](./02_RAG实战-LangChain/06_RAG进阶技巧)
 - [评估与优化](./02_RAG实战-LangChain/RECYCLER/07_系统评估与优化)
 
-### 3. 配套环境
-- `docker-compose.yml` → 启动 Milvus + MinIO + etcd
-- `requirements.txt` → Python 依赖列表
-- `volumes/` → 容器挂载存储目录
 
 ---
 
