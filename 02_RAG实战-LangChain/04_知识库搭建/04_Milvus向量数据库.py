@@ -4,8 +4,8 @@
 # embedding选型
 from langchain_community.embeddings import OllamaEmbeddings
 my_emb = OllamaEmbeddings(
-    base_url='http://localhost:11434',
-    model="bge-m3:latest")
+    base_url='http://129.201.70.35:11434',
+    model="dengcao/Qwen3-Embedding-0.6B:F16")
 
 
 # embedding选型
@@ -147,7 +147,6 @@ try:
 
         if batch_num == 0:
             # 第一次创建向量数据库
-<<<<<<< HEAD
             # vectordb = Milvus.from_documents(
             # documents=batch_docs,
             # embedding=my_emb,
@@ -155,28 +154,7 @@ try:
             # drop_old=False,
             # connection_args=connection_args,
             # )
-=======
-            vectordb = Milvus.from_documents(
-            documents=batch_docs,
-            embedding=my_emb,
-            collection_name="ZXVMAXS0821",
-            drop_old=False,
-            connection_args=connection_args,
-            )
->>>>>>> b17ee39 (v0819)
-
             # 如果使用Milvus的混合检索
-            # vectordb = Milvus.from_documents(
-            # documents=batch_docs,
-            # embedding=my_emb,
-            # builtin_function=BM25BuiltInFunction(input_field_names="text", output_field_names="sparse" ),
-            # text_field="text",
-            # vector_field=["dense", "sparse"],
-            # collection_name="ZXVMAXS4",
-            # drop_old=False,
-            # connection_args=connection_args,
-            # consistency_level="Strong",
-            # )     
             # 创建 Milvus VectorStore，实现 dense + sparse 混合检索 
             vectordb = Milvus.from_documents( 
             documents=batch_docs, 
