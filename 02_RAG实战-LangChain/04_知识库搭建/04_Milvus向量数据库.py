@@ -117,11 +117,13 @@ from langchain_core.documents import Document
 
 # 定义持久化目录
 # 向量库创建
+# connection_args = {
+#     "host": "129.201.70.35",
+#     "port": 19530,
+# }
 connection_args = {
-    "host": "129.201.70.35",
-    "port": "19530",
+    "uri": "tcp://129.201.70.35:19530"
 }
-
 
 # 定义每批处理的文档数量
 batch_size = 30
