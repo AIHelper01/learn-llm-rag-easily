@@ -129,9 +129,31 @@ SVR_WEB_HTTPS_PORT=443
 
 SVR_WEB_HTTP_PORT=8080
 SVR_WEB_HTTPS_PORT=8443
+```
 
+如果已经安装了Milvus，那么9000,9001端口也会被占用，需要修改： 
+
+```bash
+(base) root@server5:/opt/ragflow/docker# vim .env
+
+将：
+
+MINIO_PORT=9000
+MINIO_CONSOLE_PORT=9001
+
+
+改为： 
+
+MINIO_PORT=9002
+MINIO_CONSOLE_PORT=9003
 
 ```
+
+
+
+
+
+MINIO_PORT=9000
 
 
 
@@ -151,15 +173,37 @@ $ git checkout v0.22.1
 # 方案一：使用 CPU 运行 DeepDoc 服务
 $ docker compose -f docker-compose.yml up -d
 
-# 方案二：使用自定义项目名称启动（避免容器名冲突）[2](@ref)
+# 方案：使用自定义项目名称启动（避免容器名冲突）(推荐)
 $ docker compose -f docker-compose.yml -p <您自定义的项目名> up -d
-$ docker compose -f docker-compose.yml -p ragflow-docker up -d
 
 # 方案三：使用 GPU 加速 DeepDoc 服务（需要 NVIDIA GPU 支持）
 # 在 .env 文件首行添加 DEVICE=gpu 配置
 $ sed -i '1i DEVICE=gpu' .env
 $ docker compose -f docker-compose.yml up -d
 ```
+
+
+
+操作：
+
+```bash
+(base) root@server5:/opt#  cd ragflow/docker
+
+(base) root@server5:/opt/ragflow/docker# docker compose -f docker-compose.yml -p docker_ragflow up -d
+[+] Running 10/10
+ ✔ Network docker_ragflow_ragflow          Created                                                                         0.1s
+ ✔ Volume "docker_ragflow_redis_data"      Created                                                                         0.0s
+ ✔ Volume "docker_ragflow_mysql_data"      Created                                                                         0.0s
+ ✔ Volume "docker_ragflow_minio_data"      Created                                                                         0.0s
+ ✔ Volume "docker_ragflow_esdata01"        Created                                                                         0.0s
+ ✔ Container docker_ragflow-minio-1        Started                                                                         0.7s
+ ✔ Container docker_ragflow-mysql-1        Healthy                                                                         21.3s
+ ✔ Container docker_ragflow-redis-1        Started                                                                         0.8s
+ ✔ Container docker_ragflow-es01-1         Started                                                                         0.9s
+ ✔ Container docker_ragflow-ragflow-cpu-1  Started                                                                         21.8s
+```
+
+
 
 
 
@@ -217,7 +261,7 @@ RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:v0.22.1
 服务器启动成功后再次确认服务器状态：
 
 ```
-docker logs -f docker-ragflow-cpu-1
+docker logs -f docker_ragflow-ragflow-cpu-1
 ```
 
 
@@ -254,6 +298,15 @@ docker logs -f docker-ragflow-cpu-1
 
 您只需输入http://<IP>:8080 即可：未改动过配置则无需输入端口（默认的 HTTP 服务端口 80）。
 
+注册信息：
+
+```
+Email:
+admin@zte.com.cn
+Password：
+ShiYan@12345
+```
+
 
 
 
@@ -262,11 +315,47 @@ docker logs -f docker-ragflow-cpu-1
 
 
 
+### 停止服务
+
+停止：
+
+```
+docker compose  -p docker_ragflow stop
+```
+
+
+
+开始：
+
+```
+docker compose  -p docker_ragflow start
+```
+
+
+
+
+
+重启：
+
+```
+docker compose  -p docker_ragflow restart
+```
+
 
 
 
 
 ### 卸载RAGFlow
+
+
+
+```
+docker compose -p docker_ragflow down
+```
+
+
+
+
 
 
 
@@ -485,7 +574,11 @@ RAGFlow提供了两种不同的方法来处理您数据集中的文档，以优�
 
 
 
-RAGFlow和Dify共机部署时的场景，Redis可能会冲突，最简单的解决方法： Dify启动时指定名字： `-p dify_docker`
+RAGFlow和Dify共机部署时的场景，Redis可能会冲突，最简单的解决方法： 
+
+RAGFlow启动时指定名字： `-p docker_ragflow`
+
+Dify启动时指定名字： `-p docker_dify`
 
 
 
