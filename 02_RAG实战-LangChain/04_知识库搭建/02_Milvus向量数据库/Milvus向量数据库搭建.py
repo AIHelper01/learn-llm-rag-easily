@@ -8,6 +8,9 @@ my_emb = OllamaEmbeddings(
     model="dengcao/Qwen3-Embedding-0.6B:F16")
 
 
+
+
+
 # embedding选型
 # from vllm import LLM
 # my_emb = LLM(
@@ -117,13 +120,13 @@ from langchain_core.documents import Document
 
 # 定义持久化目录
 # 向量库创建
-# connection_args = {
-#     "host": "129.201.70.35",
-#     "port": 19530,
-# }
 connection_args = {
-    "uri": "tcp://129.201.70.35:19530"
+    "host": "129.201.70.35",
+    "port": 19530,
 }
+# connection_args = {
+#     "uri": "tcp://129.201.70.35:19530"
+# }
 
 # 定义每批处理的文档数量
 batch_size = 30
