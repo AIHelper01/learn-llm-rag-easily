@@ -40,6 +40,10 @@ cd learn-llm-rag-easily
 
 ### 2. 创建并激活conda环境
 
+推荐使用 **Python 3.10+**：
+
+**推荐在提供的Jupyter/VSCode环境运行**：
+
 ```
 conda create -n env_rag python=3.10 -y
 conda activate env_rag
