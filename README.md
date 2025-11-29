@@ -45,7 +45,7 @@ cd learn-llm-rag-easily
 **推荐在提供的Jupyter/VSCode环境运行**：
 
 ```
-conda create -n env_rag python=3.10 -y
+conda create -n env_rag python=3.12 -y
 conda activate env_rag
 
 pip install ipykernel
