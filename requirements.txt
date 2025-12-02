@@ -1,5 +1,7 @@
+langchain==0.3.26
 langchain_community==0.3.27
-pymupdf==1.26.4
+langchain-openai==0.3.28
 langchain_milvus==0.2.1
 sentence-transformers==5.1.1
+pymupdf==1.26.4
 xinference-client==1.13.0
